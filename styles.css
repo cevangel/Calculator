@@ -1,0 +1,22 @@
+
+.calc-input {
+    width: 400px;
+    height: 100px;
+    background: lightgrey;
+    display: flex;
+    
+}
+
+.row {
+    display:flex;
+}
+
+.button {
+    box-sizing: border-box; /*helps with sizing*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    border: solid 1px black;
+}
