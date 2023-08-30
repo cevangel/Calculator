@@ -5,22 +5,27 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
     button.addEventListener('click', (e) => {
         var value = e.target.dataset.value  //for use in if statements
         calcInput.innerText += value 
-        console.log(e.target.dataset.value)
         console.log(value)
         if (value == '='){
             console.log(operate(firstNumber, secondNumber, operand));
             calcInput.innerText = operate(firstNumber, secondNumber, operand);
+            firstNumber = calcInput.innerText;
+            secondNumber = ''
+            operand = null;
+            console.log(firstNumber, "firstNum")
+            console.log(operand, "operand" )
+            console.log(secondNumber, "secondNum")
             
         } else if (value == '+'||value == '-'||value == '*'||value == '/'){
             operand = value;
             console.log(operand)
+        
             //if click operand, then store the operand as value, and the number string as "a".
         } else if (value == 'clear') {//if value is clear, make everything blank/null
             calcInput.innerText = ''
             firstNumber = ''
             secondNumber = ''
             operand = null;
-        
         } else if (operand == null){ //if operand has not been clicked yet
             firstNumber += value;
         } else {
