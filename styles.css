@@ -1,14 +1,19 @@
 
 .calc-input {
+    display: flex;
     width: 400px;
     height: 100px;
     background: lightgrey;
     display: flex;
+    font-size: 30px;
+    justify-content: flex-end;
+    align-items: flex-end;
+    
     
 }
 
 .row {
-    display:flex;
+    display: flex;
 }
 
 .button {
