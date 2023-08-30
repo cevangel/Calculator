@@ -7,6 +7,12 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
         calcInput.innerText += value 
         console.log(value)
         if (value == '='){
+            if (operand == '/' && secondNumber == '0'){
+                calcInput.innerText = "Please do not divide by zero"
+                firstNumber = ''
+                secondNumber = ''
+                operand = null;
+            } else {
             console.log(operate(firstNumber, secondNumber, operand));
             calcInput.innerText = operate(firstNumber, secondNumber, operand);
             firstNumber = calcInput.innerText;
@@ -15,7 +21,7 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
             console.log(firstNumber, "firstNum")
             console.log(operand, "operand" )
             console.log(secondNumber, "secondNum")
-            
+            }
         } else if (value == '+'||value == '-'||value == '*'||value == '/'){
             operand = value;
             console.log(operand)
