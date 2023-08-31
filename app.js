@@ -13,7 +13,7 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
                 secondNumber = ''
                 operand = null;
             } else {
-            console.log(operate(firstNumber, secondNumber, operand));
+           // console.log(operate(firstNumber, secondNumber, operand));
             calcInput.innerText = operate(firstNumber, secondNumber, operand);
             firstNumber = calcInput.innerText;
             secondNumber = ''
@@ -23,10 +23,28 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
             console.log(secondNumber, "secondNum")
             }
         } else if (value == '+'||value == '-'||value == '*'||value == '/'){
+            if (secondNumber ==''){
             operand = value;
-            console.log(operand)
-        
+            console.log(operand) //add part if secondNum is empty
+            } else {
+            //** */important, was stuck here before
+            firstNumber = operate(firstNumber, secondNumber, operand)
+            operand = value;
+            calcInput.innerText =  firstNumber + operand// still right here
+            console.log(operate(firstNumber, secondNumber, operand));
+            secondNumber = ''
+            //calcInput.innerText = operate(firstNumber, secondNumber, operand) + operand;//went wrong here
+            //firstNumber = operate(firstNumber, secondNumber, operand);// old error, preemptively edited firstNumber
+            //operand = null;
+            console.log(firstNumber, "firstNum")
+            console.log(operand, "operand" )
+            console.log(secondNumber, "secondNum")
+            }
             //if click operand, then store the operand as value, and the number string as "a".
+            //first, evaluate the first pair of numbers (12 + 7), 
+            //When operator is clicked after first pair of numbers do:
+            //(operate, store as result as "a", 
+            //and display it in calcInput.innertext when click next operator)
         } else if (value == 'clear') {//if value is clear, make everything blank/null
             calcInput.innerText = ''
             firstNumber = ''
@@ -87,6 +105,20 @@ function operate(firstNumber, secondNumber, operand){
             return divide(firstNumber,secondNumber);        
     }
 }
+//NOTES:
+//8/29/23 Progressed thru steps 1-6. RESET FOR 7
+//8/30/23: BIGGEST PROBLEM to work on:
+//Your calculator should not evaluate more than a single pair of numbers at a time. 
+//Example: you press a number button (12), followed by an operator button (+), 
+//a second number button (7), and finally a second operator button (-). 
+//Your calculator should then do the following: 
+//first, evaluate the first pair of numbers (12 + 7), 
+    //When operator is clicked after first pair of numbers do:
+    //(operate, store as result as "a", 
+    //and display it in calcInput.innertext when click next operator)
+//second, display the result of that calculation (19), (see above)  
+//and finally, use that result (19) as the first number in your new calculation, 
+//along with the next operator (-).
 
 
 //click number button, store it as a or b; click operand button, store it as operand variable
@@ -110,3 +142,5 @@ function operate(firstNumber, secondNumber, operand){
 //Clear? Delete a, b, and operand, as well as clear display
 
 //decimal thing: index of __ or if contains "." then return nothing to help abort
+
+
