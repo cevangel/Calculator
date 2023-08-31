@@ -8,6 +8,9 @@ function roundToFive(num) {
 allButtons.forEach(button => { //when button pressed, use event listener when clicked to display in calcInput Inner text 
     button.addEventListener('click', (e) => {
         var value = e.target.dataset.value  //for use in if statements
+        if (calcInput.innerText.includes(".") && value == '.') {//Multiple DECIMAL ISSUE
+            firstNumber += '';}//Multiple decimal issue
+        else {
         calcInput.innerText += value 
         console.log(value)
         if (value == '='){
@@ -23,7 +26,6 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
             } else {
            // console.log(operate(firstNumber, secondNumber, operand));
             calcInput.innerText = roundToFive(operate(firstNumber, secondNumber, operand));
-            calcInput.innerText = roundToFive(firstNumber);
             secondNumber = ''
             operand = null;
             console.log(firstNumber, "firstNum")
@@ -64,7 +66,7 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
             secondNumber += value; 
         }
 
-    })
+    }})
 
 
 })
@@ -155,3 +157,14 @@ function operate(firstNumber, secondNumber, operand){
 
 //decimal thing: index of __ or if contains "." then return nothing to help abort
 
+function roundToTwo(num) {
+    return +(Math.round(num + "e+5")  + "e-5");
+}
+
+console.log('1.00535555511 => ', roundToTwo(1.005));
+console.log('10 => ', roundToTwo(10));
+console.log('1.7777777 => ', roundToTwo(1.7777777));
+console.log('9.123456778 => ', roundToTwo(9.1));
+console.log('1234.5678234567 => ', roundToTwo(1234.5678));
+console.log('1.3549999999999998 => ', roundToTwo(1.3549999999999998));
+console.log('10.0752345678 => ', roundToTwo(10.075));
