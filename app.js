@@ -1,6 +1,10 @@
 const calcInput = document.querySelector('.calc-input') //calcInput will display the data-value when the key event listener is pressed
 const allButtons = document.querySelectorAll('.button')
 
+function roundToFive(num) {
+    return +(Math.round(num + "e+5")  + "e-5");
+}
+
 allButtons.forEach(button => { //when button pressed, use event listener when clicked to display in calcInput Inner text 
     button.addEventListener('click', (e) => {
         var value = e.target.dataset.value  //for use in if statements
@@ -12,10 +16,14 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
                 firstNumber = ''
                 secondNumber = ''
                 operand = null;
+            } else if (firstNumber == ''){
+                calcInput.innerText = ''
+            } else if (secondNumber == '' && operand == null){
+                calcInput.innerText = roundToFive(firstNumber);
             } else {
            // console.log(operate(firstNumber, secondNumber, operand));
-            calcInput.innerText = operate(firstNumber, secondNumber, operand);
-            firstNumber = calcInput.innerText;
+            calcInput.innerText = roundToFive(operate(firstNumber, secondNumber, operand));
+            calcInput.innerText = roundToFive(firstNumber);
             secondNumber = ''
             operand = null;
             console.log(firstNumber, "firstNum")
@@ -30,7 +38,7 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
             //** */important, was stuck here before
             firstNumber = operate(firstNumber, secondNumber, operand)
             operand = value;
-            calcInput.innerText =  firstNumber + operand// still right here
+            calcInput.innerText =  roundToFive(firstNumber) + operand// still right here
             console.log(operate(firstNumber, secondNumber, operand));
             secondNumber = ''
             //calcInput.innerText = operate(firstNumber, secondNumber, operand) + operand;//went wrong here
@@ -106,6 +114,7 @@ function operate(firstNumber, secondNumber, operand){
     }
 }
 //NOTES:
+
 //8/29/23 Progressed thru steps 1-6. RESET FOR 7
 //8/30/23: BIGGEST PROBLEM to work on:
 //Your calculator should not evaluate more than a single pair of numbers at a time. 
@@ -119,6 +128,9 @@ function operate(firstNumber, secondNumber, operand){
 //second, display the result of that calculation (19), (see above)  
 //and finally, use that result (19) as the first number in your new calculation, 
 //along with the next operator (-).
+//8/31/23: 
+    //goal: round answers with long decimals so that they don’t overflow the screen.
+        //pseudocode: before display, if string is >12 char long, round to 11 char. 
 
 
 //click number button, store it as a or b; click operand button, store it as operand variable
@@ -142,5 +154,4 @@ function operate(firstNumber, secondNumber, operand){
 //Clear? Delete a, b, and operand, as well as clear display
 
 //decimal thing: index of __ or if contains "." then return nothing to help abort
-
 
