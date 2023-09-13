@@ -8,11 +8,15 @@ function roundToFive(num) {
 allButtons.forEach(button => { //when button pressed, use event listener when clicked to display in calcInput Inner text 
     button.addEventListener('click', (e) => {
         var value = e.target.dataset.value  //for use in if statements
-        if (calcInput.innerText.includes(".") && value == '.') {//Multiple DECIMAL ISSUE
-            firstNumber += '';}//Multiple decimal issue
-        else {
+    
+    if (value != "." || ((operand == null && firstNumber.indexOf(".")) == -1) || (operand != null && secondNumber.indexOf('.') == -1)
+     ) {
         calcInput.innerText += value 
-        console.log(value)
+    }
+        // Old decimal thing //if ((value == ".") && (calcInput.innerText.includes("."))){ //multiple decimal proble
+        // } else
+        // calcInput.innerText += value 
+        // console.log(value)
         if (value == '='){
             if (operand == '/' && secondNumber == '0'){
                 calcInput.innerText = "Please do not divide by zero"
@@ -38,7 +42,7 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
             console.log(operand) //add part if secondNum is empty
             } else {
             //** */important, was stuck here before
-            firstNumber = operate(firstNumber, secondNumber, operand)
+            firstNumber = operate(Number(firstNumber), Number(secondNumber), operand) //problem: if 1.2+, shows NaN
             operand = value;
             calcInput.innerText =  roundToFive(firstNumber) + operand// still right here
             console.log(operate(firstNumber, secondNumber, operand));
@@ -60,13 +64,18 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
             firstNumber = ''
             secondNumber = ''
             operand = null;
-        } else if (operand == null){ //if operand has not been clicked yet
+        } else if ((value == ".") && (firstNumber.includes('.'))) {
+      
+        } else if ((value == ".") && (operand != null && secondNumber.includes('.')) == -1) {
+
+        }
+        else if (operand == null){ //if operand has not been clicked yet
             firstNumber += value;
         } else {
             secondNumber += value; 
         }
 
-    }})
+    })
 
 
 })
@@ -161,10 +170,3 @@ function roundToTwo(num) {
     return +(Math.round(num + "e+5")  + "e-5");
 }
 
-console.log('1.00535555511 => ', roundToTwo(1.005));
-console.log('10 => ', roundToTwo(10));
-console.log('1.7777777 => ', roundToTwo(1.7777777));
-console.log('9.123456778 => ', roundToTwo(9.1));
-console.log('1234.5678234567 => ', roundToTwo(1234.5678));
-console.log('1.3549999999999998 => ', roundToTwo(1.3549999999999998));
-console.log('10.0752345678 => ', roundToTwo(10.075));
