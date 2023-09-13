@@ -9,7 +9,7 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
     button.addEventListener('click', (e) => {
         var value = e.target.dataset.value  //for use in if statements
     
-    if (value != "." || ((operand == null && firstNumber.indexOf(".")) == -1) || (operand != null && secondNumber.indexOf('.') == -1)
+    if (value != "." || ((operator == null && firstNumber.indexOf(".")) == -1) || (operator != null && secondNumber.indexOf('.') == -1)
      ) {
         calcInput.innerText += value 
     }
@@ -18,43 +18,43 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
         // calcInput.innerText += value 
         // console.log(value)
         if (value == '='){
-            if (operand == '/' && secondNumber == '0'){
+            if (operator == '/' && secondNumber == '0'){
                 calcInput.innerText = "Please do not divide by zero"
                 firstNumber = ''
                 secondNumber = ''
-                operand = null;
+                operator = null;
             } else if (firstNumber == ''){
                 calcInput.innerText = ''
-            } else if (secondNumber == '' && operand == null){
+            } else if (secondNumber == '' && operator == null){
                 calcInput.innerText = roundToFive(firstNumber);
             } else {
-           // console.log(operate(firstNumber, secondNumber, operand));
-            calcInput.innerText = roundToFive(operate(firstNumber, secondNumber, operand));
+           // console.log(operate(firstNumber, secondNumber, operator));
+            calcInput.innerText = roundToFive(operate(firstNumber, secondNumber, operator));
             secondNumber = ''
-            operand = null;
+            operator = null;
             console.log(firstNumber, "firstNum")
-            console.log(operand, "operand" )
+            console.log(operator, "operator" )
             console.log(secondNumber, "secondNum")
             }
         } else if (value == '+'||value == '-'||value == '*'||value == '/'){
             if (secondNumber ==''){
-            operand = value;
-            console.log(operand) //add part if secondNum is empty
+            operator = value;
+            console.log(operator) //add part if secondNum is empty
             } else {
             //** */important, was stuck here before
-            firstNumber = operate(Number(firstNumber), Number(secondNumber), operand) //problem: if 1.2+, shows NaN
-            operand = value;
-            calcInput.innerText =  roundToFive(firstNumber) + operand// still right here
-            console.log(operate(firstNumber, secondNumber, operand));
+            firstNumber = operate(Number(firstNumber), Number(secondNumber), operator) //problem: if 1.2+, shows NaN
+            operator = value;
+            calcInput.innerText =  roundToFive(firstNumber) + operator// still right here
+            console.log(operate(firstNumber, secondNumber, operator));
             secondNumber = ''
-            //calcInput.innerText = operate(firstNumber, secondNumber, operand) + operand;//went wrong here
-            //firstNumber = operate(firstNumber, secondNumber, operand);// old error, preemptively edited firstNumber
-            //operand = null;
+            //calcInput.innerText = operate(firstNumber, secondNumber, operator) + operator;//went wrong here
+            //firstNumber = operate(firstNumber, secondNumber, operator);// old error, preemptively edited firstNumber
+            //operator = null;
             console.log(firstNumber, "firstNum")
-            console.log(operand, "operand" )
+            console.log(operator, "operator" )
             console.log(secondNumber, "secondNum")
             }
-            //if click operand, then store the operand as value, and the number string as "a".
+            //if click operator, then store the operator as value, and the number string as "a".
             //first, evaluate the first pair of numbers (12 + 7), 
             //When operator is clicked after first pair of numbers do:
             //(operate, store as result as "a", 
@@ -63,13 +63,13 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
             calcInput.innerText = ''
             firstNumber = ''
             secondNumber = ''
-            operand = null;
+            operator = null;
         } else if ((value == ".") && (firstNumber.includes('.'))) {
       
-        } else if ((value == ".") && (operand != null && secondNumber.includes('.')) == -1) {
+        } else if ((value == ".") && (operator != null && secondNumber.includes('.')) == -1) {
 
         }
-        else if (operand == null){ //if operand has not been clicked yet
+        else if (operator == null){ //if operator has not been clicked yet
             firstNumber += value;
         } else {
             secondNumber += value; 
@@ -80,17 +80,17 @@ allButtons.forEach(button => { //when button pressed, use event listener when cl
 
 })
 
-//store the 3 variables (a,b, operand)
+//store the 3 variables (a,b, operator)
 
 let firstNumber = '';
 let secondNumber = '';
-let operand = null;
+let operator = null;
 
-//append to first number (if statement, if operand is null, then append to firstNum, else 
-// then click operand to set operand, 
+//append to first number (if statement, if operator is null, then append to firstNum, else 
+// then click operator to set operator, 
 
-//if operand is +/-/*/, then set operand to that (trying to make sure the first thing is a number)
-//else if operand null, then append to firstNum,
+//if operator is +/-/*/, then set operator to that (trying to make sure the first thing is a number)
+//else if operator null, then append to firstNum,
 //else
 
 //Your calculator is going to contain functions for all of the basic math operators you typically find on simple calculators, so start by creating functions for the following items and testing them in your browser’s console.
@@ -111,9 +111,9 @@ function divide(firstNumber,secondNumber){
     return firstNumber/secondNumber;
 }
 
-// 2.operate function (3 variables, a, b, operand) that calls one of the above functions
-function operate(firstNumber, secondNumber, operand){
-    switch(operand){
+// 2.operate function (3 variables, a, b, operator) that calls one of the above functions
+function operate(firstNumber, secondNumber, operator){
+    switch(operator){
         case '+':
             return add(firstNumber,secondNumber);
         case '-':
@@ -144,10 +144,10 @@ function operate(firstNumber, secondNumber, operand){
         //pseudocode: before display, if string is >12 char long, round to 11 char. 
 
 
-//click number button, store it as a or b; click operand button, store it as operand variable
-//keep appending a string number until it hits an operand number. 
+//click number button, store it as a or b; click operator button, store it as operator variable
+//keep appending a string number until it hits an operator number. 
 //chaining stuff: 5x2 gets stored as new 'a'
-//as clicking the buttons, (if anything other than operand or equal sign, would be appending)
+//as clicking the buttons, (if anything other than operator or equal sign, would be appending)
 
 //**important */
 //You should already have the code that can populate the display, 
@@ -162,7 +162,7 @@ function operate(firstNumber, secondNumber, operand){
 
 //THERE IS A ROUNDING METHOD IN JS
 
-//Clear? Delete a, b, and operand, as well as clear display
+//Clear? Delete a, b, and operator, as well as clear display
 
 //decimal thing: index of __ or if contains "." then return nothing to help abort
 
